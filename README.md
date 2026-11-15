@@ -22,10 +22,7 @@ A movie recommender system built **from scratch in NumPy** using Matrix Factoriz
 | **MF + L2 (ours)** | **0.0729** | **0.4031** | **0.3820** |
 
 <p align="center">
-  <img src="assets/figure1.png" width="720" alt="Test metrics comparison">
-</p>
-<p align="center">
-  <img src="assets/figure2.png" width="420" alt="Train vs test NDCG: regularization reduces over-fitting">
+  <img src="assets/results.svg" width="760" alt="Test metrics: popularity vs. plain MF vs. MF + L2">
 </p>
 
 ## How it works
