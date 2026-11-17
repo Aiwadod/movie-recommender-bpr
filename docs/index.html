@@ -234,9 +234,14 @@ footer a:hover{color:var(--accent-2)}
         <h3>Where it is weak</h3>
         BPR optimises ranking rather than rating, so well-known titles surface easily and genuinely obscure
         ones rarely do. Below three picks the vector is mostly noise.
+        <h3>About this interface</h3>
+        The recommender itself — the model, the BPR training loop and the evaluation — is implemented
+        from scratch in NumPy as a university course project. This interface is <b>not part of the course
+        requirements</b>: it was added afterwards so the trained model can actually be tried, and its
+        visual design was produced with AI assistance.
         <h3>Artwork</h3>
-        Every poster here is generated in the browser from the film's title and genre — a seeded canvas
-        composition, not the real artwork.
+        Poster and backdrop artwork is supplied by TMDB and loaded from their servers. When a title has
+        no match, the page falls back to a seeded canvas composition generated from its title and genre.
       </div>
     </div>
   </div></div>
