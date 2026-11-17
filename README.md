@@ -6,6 +6,8 @@ A movie recommender system built **from scratch in NumPy** using Matrix Factoriz
 
 **[▶ Live demo](https://aiwadod.github.io/movie-recommender-bpr/)** — pick films you liked and the trained model ranks all 2,496 titles for you in the browser.
 
+> The demo interface is an extra, **not part of the course requirements**. Its design was built with AI assistance, and poster artwork is supplied by TMDB. The recommender itself — Matrix Factorization, the BPR training loop and the evaluation — is implemented from scratch in NumPy.
+
 ---
 
 ## Highlights
