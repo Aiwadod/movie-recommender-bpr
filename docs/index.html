@@ -571,12 +571,12 @@ function proxy(gs){
 let recentLoaded=false;
 async function loadRecent(){
   if(recentLoaded||!TMDB_KEY)return;recentLoaded=true;
-  let raw=null;try{raw=JSON.parse(localStorage.getItem('recent2')||'null');}catch(e){}
+  let raw=null;try{raw=JSON.parse(localStorage.getItem('recent3')||'null');}catch(e){}
   if(!raw){
     raw=[];
     for(const y of YEARS){
       const vc=y>=2026?50:300;
-      const u=l=>API+'discover/movie?api_key='+TMDB_KEY+'&sort_by=popularity.desc&primary_release_year='+y+
+      const u=l=>API+'discover/movie?api_key='+TMDB_KEY+'&sort_by=vote_count.desc&primary_release_year='+y+
         '&vote_count.gte='+vc+'&language='+l+'&page=1';
       try{
         const [en,ar]=await Promise.all([fetch(u('en-US')).then(r=>r.json()),fetch(u('ar')).then(r=>r.json())]);
@@ -588,7 +588,7 @@ async function loadRecent(){
         });
       }catch(e){}
     }
-    try{localStorage.setItem('recent2',JSON.stringify(raw));}catch(e){}
+    try{localStorage.setItem('recent3',JSON.stringify(raw));}catch(e){}
   }
   raw.forEach(m=>{EXTRA.push(Object.assign({out:true,v:proxy(m.g.split('|'))},m));});
 }
