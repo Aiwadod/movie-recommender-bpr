@@ -4,6 +4,8 @@ A movie recommender system built **from scratch in NumPy** using Matrix Factoriz
 
 > Course project — CCAI 422 Recommender Systems, University of Jeddah (Summer 2026)
 
+**[▶ Live demo](https://aiwadod.github.io/movie-recommender-bpr/)** — pick films you liked and the trained model ranks all 2,496 titles for you in the browser.
+
 ---
 
 ## Highlights
