@@ -23,7 +23,7 @@ def load_data(path="ml-1m/ratings.dat", max_users=1000, min_ratings=10, test_rat
     nu, ni = len(users), len(items)
     train_pos, test_pos = {u: [] for u in range(nu)}, {u: [] for u in range(nu)}
     for u, g in df.groupby("u"):                            # 80/20 split per user
-        m = g["i"].to_numpy(); rng.shuffle(m); cut = max(1, int(len(m) * test_ratio))
+        m = g["i"].to_numpy(copy=True); rng.shuffle(m); cut = max(1, int(len(m) * test_ratio))
         test_pos[u], train_pos[u] = m[:cut], m[cut:]
     pairs = np.array([(u, i) for u in range(nu) for i in train_pos[u]])
     pop = np.zeros(ni)
