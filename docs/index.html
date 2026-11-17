@@ -175,7 +175,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :root[dir=rtl] .info h1,:root[dir=rtl] .vh1{font-family:'Cairo',sans-serif;text-transform:none;line-height:1.25}
 :root[dir=rtl] .eyebrow,:root[dir=rtl] .stat span,:root[dir=rtl] .out{letter-spacing:0}
 :root[dir=rtl] .logo{font-family:'Oswald',sans-serif}
-.fhero{position:relative;overflow:hidden;min-height:600px;display:flex;flex-direction:column}
+.fhero{position:relative;overflow:hidden;min-height:clamp(430px,64vh,620px);display:flex;flex-direction:column}
 .fhero img.fbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 28%}
 .fscrim{position:absolute;inset:0;background:
   linear-gradient(180deg,#060608d9 0%,#06060845 22%,#060608b3 62%,var(--bg) 97%)}
@@ -458,7 +458,7 @@ function art(cv,title,genres){
 const TMDB_KEY='4a9ff01d31df60bcd435af18760a465c';
 const IMG='https://image.tmdb.org/t/p/';
 const API='https://api.themoviedb.org/3/';
-let tcache={};try{tcache=JSON.parse(localStorage.getItem('tmdb1m')||'{}');}catch(e){}
+let tcache={};try{tcache=JSON.parse(localStorage.getItem('tmdb2')||'{}');}catch(e){}
 function qTitle(t){
   t=t.replace(/\s*\([^)]*\)\s*$/,'').trim();
   const m=t.match(/^(.*),\s(The|A|An|La|Le|Les|Il|L'|Der|Das|Die|El|Los)$/);
@@ -469,14 +469,14 @@ async function tmdb(i){
   const it=item(i);
   if(it.out)return{id:it.id,p:it.p,b:it.b,title:LANG==='ar'?it.ta:it.t};
   const key=it.t+'|'+it.y+'|'+LANG;
-  if(key in tcache)return tcache[key];
+  if(key in tcache&&(tcache[key]===null||tcache[key].id))return tcache[key];
   try{
     const r=await fetch(API+'search/movie?api_key='+TMDB_KEY+'&language='+(LANG==='ar'?'ar':'en-US')+
       '&query='+encodeURIComponent(qTitle(it.t))+'&year='+it.y);
     const j=await r.json(),h=j.results&&j.results[0];
     tcache[key]=h?{id:h.id,p:h.poster_path||null,b:h.backdrop_path||null,title:h.title||null}:null;
   }catch(e){tcache[key]=null;}
-  try{localStorage.setItem('tmdb1m',JSON.stringify(tcache));}catch(e){}
+  try{localStorage.setItem('tmdb2',JSON.stringify(tcache));}catch(e){}
   return tcache[key];
 }
 const io=('IntersectionObserver'in window)?new IntersectionObserver(es=>{
@@ -553,7 +553,7 @@ function proxy(gs){
 let recentLoaded=false;
 async function loadRecent(){
   if(recentLoaded||!TMDB_KEY)return;recentLoaded=true;
-  let raw=null;try{raw=JSON.parse(localStorage.getItem('recent1')||'null');}catch(e){}
+  let raw=null;try{raw=JSON.parse(localStorage.getItem('recent2')||'null');}catch(e){}
   if(!raw){
     raw=[];
     for(const y of YEARS){
@@ -570,7 +570,7 @@ async function loadRecent(){
         });
       }catch(e){}
     }
-    try{localStorage.setItem('recent1',JSON.stringify(raw));}catch(e){}
+    try{localStorage.setItem('recent2',JSON.stringify(raw));}catch(e){}
   }
   raw.forEach(m=>{EXTRA.push(Object.assign({out:true,v:proxy(m.g.split('|'))},m));});
 }
